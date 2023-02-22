@@ -1,0 +1,78 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+    body {
+        @apply hidden min-h-screen flex-col bg-indigo-50 duration-500 dark:bg-slate-800;
+    }
+    header {
+        @apply sticky top-0 z-10 flex flex-wrap items-center justify-between bg-slate-900 px-4 text-white shadow-2xl;
+    }
+    .menu-btn {
+        @apply hidden py-2 text-4xl hover:cursor-pointer;
+    }
+    nav {
+        @apply flex text-sm font-semibold uppercase transition-all max-md:w-full max-md:flex-col max-md:peer-checked/close-nav:hidden md:mr-6 [&>*:hover]:bg-pink-700 [&>*]:rounded-lg [&>*]:p-4;
+    }
+    .page-title-container {
+        @apply flex items-center justify-between bg-pink-700 p-4 text-center text-5xl text-white shadow-xl [&>*]:max-md:text-4xl [&>a:hover]:scale-110;
+    }
+    .filter-container {
+        @apply flex items-center justify-center gap-2 dark:text-slate-100 max-md:flex-col lg:flex-grow;
+    }
+    .category-container {
+        @apply flex flex-grow justify-evenly gap-2 rounded-2xl max-lg:peer-checked/filter-close:hidden max-md:flex-col [&>*]:rounded-2xl [&>input:checked+label]:bg-pink-700 [&>input:checked+label]:text-white  [&>input]:hidden [&>label]:border-2 [&>label]:border-pink-700  [&>label]:px-2;
+    }
+    main {
+        @apply flex flex-shrink flex-grow flex-col;
+    }
+    .events-container {
+        @apply my-auto flex flex-wrap gap-8 p-4;
+    }
+    .card {
+        @apply mx-auto flex flex-col overflow-hidden rounded-2xl bg-slate-50 shadow-lg  dark:bg-slate-900 dark:text-slate-100 dark:shadow-slate-700;
+    }
+    .event-container {
+        @apply card relative w-96 transition-all hover:brightness-110  md:hover:scale-110 md:hover:shadow-2xl;
+    }
+    .event-category {
+        @apply absolute rounded-lg bg-pink-700 py-1 px-3 uppercase text-white;
+    }
+    .event-img {
+        @apply h-40 border-b-8 border-pink-700 object-cover;
+    }
+    .event-content {
+        @apply flex flex-col gap-2 p-2;
+    }
+    .event-title {
+        @apply text-center text-2xl font-semibold;
+    }
+    .event-details {
+        @apply font-mono text-lg font-semibold [&>div]:flex [&>div]:justify-between [&_i]:text-pink-700;
+    }
+    .btn {
+        @apply w-full rounded-3xl bg-slate-800 p-1 text-center font-mono text-2xl font-semibold text-white shadow-md hover:bg-pink-700 group-hover:bg-pink-700;
+    }
+
+    footer {
+        @apply bg-slate-900 p-2 text-3xl text-white;
+    }
+    .socials-container {
+        @apply flex justify-center gap-4 [&>*]:rounded-full [&>*]:bg-pink-700 [&>*]:p-3 [&>a:hover]:brightness-125;
+    }
+
+    .contact-details {
+        @apply flex flex-grow flex-col p-4 [&>input]:mb-5 [&>input]:flex-grow  [&>input]:p-2;
+    }
+    input,
+    textarea {
+        @apply rounded-lg bg-blue-100/50 text-slate-800/60 shadow-md dark:bg-slate-400 dark:text-slate-100 placeholder:dark:text-slate-100/80;
+    }
+    .table-title {
+        @apply bg-slate-900 p-3 text-2xl uppercase text-slate-100 [&~*]:bg-pink-700;
+    }
+    .table-subtitle {
+        @apply h-10 bg-pink-700 font-thin text-slate-100;
+    }
+}

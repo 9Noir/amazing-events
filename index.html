@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="assets/css/styles.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+    <!-- <script src="assets/js/darkmode"></script> -->
     <title>Home</title>
 </head>
 
@@ -17,15 +18,17 @@
         </div>
         <input type="radio" id="open-nav" class="peer/open-nav hidden" name="menu-navbar">
         <input type="radio" name="menu-navbar" class="peer/close-nav hidden" id="close-nav" checked>
-        <label for="open-nav" class="menu-btn max-md:peer-checked/close-nav:flex"><i class="bi bi-list"></i></label>
+        <label for="open-nav" class="menu-btn max-md:peer-checked/close-nav:flex"><i
+                class="bi bi-list"></i></label>
         <label for="close-nav" class="menu-btn max-md:peer-checked/open-nav:flex"><i class="bi bi-x"></i></label>
-        <nav>
+        <nav class="">
             <a href="#">Home</a>
             <a href="upcoming.html">Upcoming Events</a>
             <a href="past.html">Past Events</a>
             <a href="contact.html">Contact</a>
             <a href="stats.html">Stats</a>
         </nav>
+        <button onclick="toggleDarkMode()" id="toggleDarkButton" class="absolute top-3 md:top-2 max-md:right-14 md:right-4 text-2xl"><i class="bi"></i></button>
     </header>
 
     <main>
@@ -34,26 +37,35 @@
             <h1 class="font-semibold">Home</h1>
             <a href="upcoming.html"><i class="bi bi-chevron-right"></i></a>
         </div>
-        <div class="grid gap-5 p-4 md:grid-cols-3">
-            <!-- class="flex flex-1 max-md:[&>*]:text-lg max-md:[&>*]:p-3 justify-center max-md:flex-wrap  md:col-span-2 max-md:[&_input]:hidden [&>*]:accent-pink-700 md:[&>*]:flex-grow"> -->
-            <div
-                class="dark:text-slate-100 [&>input]:max-w-[1.5em] flex md:[&>label]:pl-1 md:[&_label]:pt-4 max-md:grid max-md:justify-self-center grid-cols-2  max-md:gap-3 max-md:[&>*]:text-lg md:col-span-2 [&>*]:accent-pink-700 md:[&>*]:flex-grow">
-                <input type="checkbox" id="category1" name="category">
-                <label for="category1">Category 1</label>
-                <input type="checkbox" id="category2" name="category">
-                <label for="category2">Category 2</label>
-                <input type="checkbox" id="category3" name="category">
-                <label for="category3">Category 3</label>
-                <input type="checkbox" id="category4" name="category">
-                <label for="category4">Category 4</label>
-                <input type="checkbox" id="category5" name="category">
-                <label for="category5">Category 5</label>
+
+        <div class="flex p-4 gap-2">
+            <div class="filter-container">
+                <input type="radio" id="filter-open" class="peer/filter-open hidden" name="filter-status">
+                <input type="radio" name="filter-status" class="peer/filter-close hidden" id="filter-close" checked>
+                <label for="filter-open" class="max-lg:peer-checked/filter-close:flex py-0 menu-btn"><i
+                        class="bi bi-filter-circle"></i></label>
+                <label for="filter-close" class="max-lg:peer-checked/filter-open:flex py-0 menu-btn"><i
+                        class="bi bi-filter-circle-fill"></i></label>
+                <p class="max-lg:hidden">Category filter:</p>
+                <div class="category-container">
+                    <input type="checkbox" id="category1" name="category">
+                    <label for="category1">Category 1</label>
+                    <input type="checkbox" id="category2" name="category">
+                    <label for="category2">Category 2</label>
+                    <input type="checkbox" id="category3" name="category">
+                    <label for="category3">Category 3</label>
+                    <input type="checkbox" id="category4" name="category">
+                    <label for="category4">Category 4</label>
+                    <input type="checkbox" id="category5" name="category">
+                    <label for="category5">Category 5</label>
+                </div>
             </div>
-            <form class="flex relative p-2">
-                <input type="search" placeholder="Search" class="p-2 rounded-lg flex-grow">
-                <button type="submit" class=" btn w-auto px-2"><i class="bi bi-search"></i></button>
+            <form class="flex items-start gap-1 flex-grow">
+                <input type="search" placeholder="Search" class="p-2 w-0 rounded-lg flex-grow">
+                <button type="submit" class="btn w-auto px-2"><i class="bi bi-search"></i></button>
             </form>
         </div>
+        
         <div class="events-container">
             <a href="details.html" class="event-container group">
                 <h6 class="event-category">Cinema</h6>
@@ -186,6 +198,8 @@
             <a href=""><i class="bi bi-whatsapp"></i></a>
         </div>
     </footer>
+
+    <script src="assets/js/main.js"></script>
 </body>
 
 </html>
