@@ -26,7 +26,7 @@
             <a href="contact.html">Contact</a>
             <a href="stats.html">Stats</a>
         </nav>
-        <button onclick="toggleDarkMode()" id="toggleDarkButton" class="absolute top-3 md:top-2 max-md:right-14 md:right-4 text-2xl"><i class="bi"></i></button>
+        <button onclick="toggleDarkMode()" class="toggleDark-btn"></button>
     </header>
 
     <main>
@@ -44,148 +44,53 @@
                         class="bi bi-filter-circle"></i></label>
                 <label for="filter-close" class="max-lg:peer-checked/filter-open:flex py-0 menu-btn"><i
                         class="bi bi-filter-circle-fill"></i></label>
-                <p class="max-lg:hidden">Category filter:</p>
                 <div class="category-container">
-                    <input type="checkbox" id="category1" name="category">
-                    <label for="category1">Category 1</label>
-                    <input type="checkbox" id="category2" name="category">
-                    <label for="category2">Category 2</label>
-                    <input type="checkbox" id="category3" name="category">
-                    <label for="category3">Category 3</label>
-                    <input type="checkbox" id="category4" name="category">
-                    <label for="category4">Category 4</label>
-                    <input type="checkbox" id="category5" name="category">
-                    <label for="category5">Category 5</label>
+                    <input type="checkbox" id="Food Fair" name="category" value="Food Fair" onchange="filterEvents()">
+                    <label for="Food Fair">Food Fair</label>
+                    <input type="checkbox" id="Museum" name="category" value="Museum" onchange="filterEvents()">
+                    <label for="Museum">Museum</label>
+                    <input type="checkbox" id="Costume Party" name="category" value="Costume Party"
+                        onchange="filterEvents()">
+                    <label for="Costume Party">Costume Party</label>
+                    <input type="checkbox" id="Music Concert" name="category" value="Music Concert"
+                        onchange="filterEvents()">
+                    <label for="Music Concert">Music Concert</label>
+                    <input type="checkbox" id="Race" name="category" value="Race" onchange="filterEvents()">
+                    <label for="Race">Race</label>
+                    <input type="checkbox" id="Book Exchange" name="category" value="Book Exchange"
+                        onchange="filterEvents()">
+                    <label for="Book Exchange">Book Exchange</label>
+                    <input type="checkbox" id="Cinema" name="category" value="Cinema" onchange="filterEvents()">
+                    <label for="Cinema">Cinema</label>
                 </div>
             </div>
             <form class="flex items-start gap-1 flex-grow">
-                <input type="search" placeholder="Search" class="p-2 w-0 rounded-lg flex-grow">
-                <button type="submit" class="btn w-auto px-2"><i class="bi bi-search"></i></button>
+                <input type="search" onkeyup="filterEvents()" oninput="filterEvents()"
+                    placeholder="Search by event name" class="p-2 w-0 rounded-lg flex-grow">
             </form>
         </div>
 
+        <a href="details.html" class="event-container hidden group">
+            <h6 class="event-category"></h6>
+            <img class="event-img" src="assets/img/Cinema.jpg" alt="">
+            <div class="event-content">
+                <h4 class="event-title"></h4>
+                <p class="event-description truncate"></p>
+                <div class="event-details">
+                    <div>
+                        <p class="event-assistance"><i class="bi bi-person-fill"></i> </p>
+                        <p><span class="event-date"></span> <i class="bi bi-calendar2-week"></i></p>
+                    </div>
+                    <div>
+                        <p class="event-price"><i class="bi bi-currency-dollar"></i> </p>
+                        <p><span class="event-place"></span> <i class="bi bi-geo-alt-fill"></i></p>
+                    </div>
+                </div>
+                <button class="btn">Details</button>
+            </div>
+        </a>
+        
         <div class="events-container">
-            <a href="details.html" class="event-container group">
-                <h6 class="event-category">Cinema</h6>
-                <img class="event-img" src="assets/img/Cinema.jpg" alt="">
-                <div class="event-content">
-                    <h4 class="event-title">Movie Night</h4>
-                    <p class="truncate">Join us for a night of movies and popcorn!</p>
-                    <div class="event-details">
-                        <div>
-                            <span><i class="bi bi-person-fill"></i> 50</span>
-                            <span>March 15 <i class="bi bi-calendar2-week"></i></span>
-                        </div>
-                        <div>
-                            <span><i class="bi bi-currency-dollar"></i> 20</span>
-                            <span>Cinema City <i class="bi bi-geo-alt-fill"></i></span>
-                        </div>
-                    </div>
-                    <span class="btn">Details</span>
-                </div>
-            </a>
-
-            <a href="details.html" class="event-container group">
-                <h6 class="event-category">Costume Party</h6>
-                <img class="event-img" src="assets/img/Costume_Party.jpg" alt="">
-                <div class="event-content">
-                    <h4 class="event-title">Halloween Party</h4>
-                    <p class="truncate">Dress up in your spookiest costume for a night of fun!</p>
-                    <div class="event-details">
-                        <div>
-                            <span><i class="bi bi-person-fill"></i> 100</span>
-                            <span>October 31 <i class="bi bi-calendar2-week"></i></span>
-                        </div>
-                        <div>
-                            <span><i class="bi bi-currency-dollar"></i> 30</span>
-                            <span>Ghostly Manor <i class="bi bi-geo-alt-fill"></i></span>
-                        </div>
-                    </div>
-                    <span class="btn">Details</span>
-                </div>
-            </a>
-
-            <a href="details.html" class="event-container group">
-                <h6 class="event-category">Food Fair</h6>
-                <img class="event-img" src="assets/img/Food_Fair.jpg" alt="">
-                <div class="event-content">
-                    <h4 class="event-title">Taste of the World</h4>
-                    <p class="truncate">Sample dishes from around the world at our food fair!</p>
-                    <div class="event-details">
-                        <div>
-                            <span><i class="bi bi-person-fill"></i> 250</span>
-                            <span>August 15 <i class="bi bi-calendar2-week"></i></span>
-                        </div>
-                        <div>
-                            <span><i class="bi bi-currency-dollar"></i> 30</span>
-                            <span>New Yersey <i class="bi bi-geo-alt-fill"></i></span>
-                        </div>
-                    </div>
-                    <span class="btn">Details</span>
-                </div>
-            </a>
-
-            <a href="details.html" class="event-container group">
-                <h6 class="event-category">Marathon</h6>
-                <img class="event-img" src="assets/img/Marathon.jpg" alt="">
-                <div class="event-content">
-                    <h4 class="event-title">Marathon Race</h4>
-                    <p class="truncate">Join the adrenaline rush and participate in the marathon race.</p>
-                    <div class="event-details">
-                        <div>
-                            <span><i class="bi bi-person-fill"></i> 500</span>
-                            <span>May 15 <i class="bi bi-calendar2-week"></i></span>
-                        </div>
-                        <div>
-                            <span><i class="bi bi-currency-dollar"></i> 50</span>
-                            <span>Central Park <i class="bi bi-geo-alt-fill"></i></span>
-                        </div>
-                    </div>
-                    <span class="btn">Details</span>
-                </div>
-            </a>
-
-            <a href="details.html" class="event-container group">
-                <h6 class="event-category">Museum Tour</h6>
-                <img class="event-img" src="assets/img/Museum_Tour.jpg" alt="">
-                <div class="event-content">
-                    <h4 class="event-title">National Museum Tour</h4>
-                    <p class="truncate">Explore the art and history of the country with the National Museum Tour.</p>
-                    <div class="event-details">
-                        <div>
-                            <span><i class="bi bi-person-fill"></i> 200</span>
-                            <span>June 6 <i class="bi bi-calendar2-week"></i></span>
-                        </div>
-                        <div>
-                            <span><i class="bi bi-currency-dollar"></i> 30</span>
-                            <span>National Museum <i class="bi bi-geo-alt-fill"></i></span>
-                        </div>
-                    </div>
-                    <span class="btn">Details</span>
-                </div>
-            </a>
-
-            <a href="details.html" class="event-container group">
-                <h6 class="event-category">Music Concert</h6>
-                <img class="event-img" src="assets/img/Music_Concert.jpg" alt="">
-                <div class="event-content">
-                    <h4 class="event-title">Summer Music Festival</h4>
-                    <p class="truncate">Enjoy the best of music in the Summer Music Festival.</p>
-                    <div class="event-details">
-                        <div>
-                            <span><i class="bi bi-person-fill"></i> 1000</span>
-                            <span>August 15 <i class="bi bi-calendar2-week"></i></span>
-                        </div>
-                        <div>
-                            <span><i class="bi bi-currency-dollar"></i> 100</span>
-                            <span>Central Park <i class="bi bi-geo-alt-fill"></i></span>
-                        </div>
-                    </div>
-                    <span class="btn">Details</span>
-
-                </div>
-            </a>
-
         </div>
     </main>
 
@@ -197,6 +102,7 @@
         </div>
     </footer>
 
+    <script src="assets/js/data_ae_1.js"></script>
     <script src="assets/js/main.js"></script>
 </body>
 
