@@ -26,39 +26,51 @@ function toggleDarkMode() {
 // let categoryContainer = document.querySelector(".category-container");
 // category.forEach((c) => (categoryContainer.innerHTML += `<input type="checkbox" id="${c}" name="category" value="${c}" onChange="filterEvents()"><label for="${c}">${c}</label>`));
 
-let events;
+let events=[];
 let path = location.pathname;
-let pathCards = ["index","upcoming","past"];
+let pathCards = ["index", "upcoming", "past", "details"];
+
 if (path.includes(pathCards[0])) {
     events = data.events;
 } else if (path.includes(pathCards[1])) {
     events = data.events.filter((e) => new Date(data.currentDate) < new Date(e.date));
 } else if (path.includes(pathCards[2])) {
     events = data.events.filter((e) => new Date(data.currentDate) > new Date(e.date));
+} else if (path.includes(pathCards[3])) {
+    eventId = new URLSearchParams(window.location.search).get('id');
+    events.push(data.events.find((e) => e._id == eventId));
 }
 
 //Para renderizar solo en las pathCards
-if(pathCards.some(p=>path.includes(p))){
+if (pathCards.some((p) => path.includes(p))) {
     var eventsContainer = document.querySelector(".events-container");
     //Render de todos los eventos
     renderCards(events);
 }
 
 function renderCards(events) {
-    eventsContainer.innerHTML = "";
+    if(!path.includes("details"))eventsContainer.innerHTML = "";
     events.forEach((e) => {
-        let card = document.querySelector(".event-container").cloneNode(true);
-        card.classList.remove("hidden");
-        (new Date(data.currentDate) > new Date(e.date)) && path.includes("index") ? card.classList.add("grayscale") : undefined;
+        let card;
+        if (path.includes("details")) {
+            card = document.querySelector(".card");
+            card.querySelector(".event-capacity").innerHTML += e.capacity;
+        } else {
+            card = document.querySelector(".event-container").cloneNode(true);
+            card.classList.remove("hidden");
+            card.href = "details.html?id=" + e._id;
+        }
+
+        new Date(data.currentDate) > new Date(e.date) && path.includes("index") ? card.classList.add("grayscale") : undefined;
         card.querySelector(".event-category").textContent = e.category;
-        card.querySelector(".event-img").src = e.image;
+        card.querySelector("img").src = e.image;
         card.querySelector(".event-title").textContent = e.name;
         card.querySelector(".event-description").textContent = e.description;
         card.querySelector(".event-assistance").innerHTML += e.assistance;
         card.querySelector(".event-date").innerHTML += e.date;
         card.querySelector(".event-price").innerHTML += e.price;
         card.querySelector(".event-place").innerHTML += e.place;
-        eventsContainer.appendChild(card);
+        if(!path.includes("details"))eventsContainer.appendChild(card);
     });
 }
 

@@ -63,7 +63,6 @@
     .socials-container {
         @apply flex justify-center gap-4 [&>*]:rounded-full [&>*]:bg-pink-700 [&>*]:p-3 [&>a:hover]:brightness-125;
     }
-
     .contact-details {
         @apply flex flex-grow flex-col p-4 [&>input]:mb-5 [&>input]:flex-grow  [&>input]:p-2;
     }

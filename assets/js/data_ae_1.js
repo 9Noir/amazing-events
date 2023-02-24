@@ -46,7 +46,7 @@ let data = {
         "category":"Museum",
         "place":"Paris",
         "capacity":8200,
-        "estimate":8200,
+        "assistance":8200,
         "price":3500
       },
       {
@@ -70,7 +70,7 @@ let data = {
         "category":"Costume Party",
         "place":"Room C",
         "capacity":12000,
-        "estimate":9000,
+        "assistance":9000,
         "price":12
       },
       {
@@ -82,7 +82,7 @@ let data = {
         "category":"Music Concert",
         "place":"Room A"
         ,"capacity":138000,
-        "estimate":138000,
+        "assistance":138000,
         "price":150
       },
       {
@@ -130,7 +130,7 @@ let data = {
         "category":"Book Exchange",
         "place":"Room D1",
         "capacity":150000,
-        "estimate":123286,
+        "assistance":123286,
         "price":1
       },
       {
@@ -166,7 +166,7 @@ let data = {
         "category":"Cinema",
         "place":"Room D1",
         "capacity":9000,
-        "estimate":9000,
+        "assistance":9000,
         "price":250
       }
     ]
