@@ -25,7 +25,7 @@
         @apply flex items-center justify-center gap-2 dark:text-slate-50 max-md:flex-col;
     }
     .category-container {
-        @apply flex justify-evenly gap-2 rounded-2xl max-lg:peer-checked/filter-close:hidden max-md:flex-col [&>*]:rounded-2xl [&>input:checked+label]:bg-pink-700 [&>input:checked+label]:text-slate-50 uppercase [&>input]:hidden [&>label]:border-2 [&>label]:border-pink-700  [&>label]:px-2;
+        @apply flex flex-wrap justify-evenly gap-2 rounded-2xl uppercase max-lg:peer-checked/filter-close:hidden max-md:flex-col [&>*]:rounded-2xl [&>input:checked+label]:bg-pink-700 [&>input:checked+label]:text-slate-50 [&>input]:hidden [&>label]:border-2 [&>label]:border-pink-700  [&>label]:px-2;
     }
     main {
         @apply flex flex-shrink flex-grow flex-col;
@@ -43,25 +43,34 @@
         @apply absolute rounded-lg bg-pink-700 py-1 px-3 uppercase text-slate-50;
     }
     .event-img {
-        @apply h-40 border-b-8 border-pink-700 object-cover;
+        @apply h-80 border-b-8 border-pink-700 object-cover max-md:h-60;
     }
     .event-content {
-        @apply flex flex-col gap-2 p-2;
+        @apply flex flex-grow flex-col gap-2 p-4;
+    }
+    .event-title-container {
+        @apply -mt-1.5 flex flex-col justify-between gap-2 px-4;
     }
     .event-title {
         @apply text-center text-2xl font-semibold;
     }
     .event-details {
-        @apply font-mono text-lg font-semibold [&>div]:flex [&>div]:justify-between [&_i]:text-pink-700;
+        @apply flex flex-wrap justify-between font-mono text-lg font-semibold [&_i]:text-pink-700;
+    }
+    .event-date-container {
+        @apply w-24 overflow-hidden  rounded-md bg-slate-100 text-center font-bold shadow-md shadow-slate-400 dark:bg-slate-800;
     }
     .btn {
-        @apply w-full rounded-3xl bg-slate-800 p-1 text-center font-mono text-2xl font-semibold text-slate-50 shadow-md hover:bg-pink-700 group-hover:bg-pink-700;
+        @apply mt-4 w-full rounded-3xl bg-slate-800 p-1 text-center font-mono text-2xl font-semibold text-slate-50 shadow-md hover:bg-pink-700 group-hover:bg-pink-700;
     }
     footer {
-        @apply bg-black p-2 text-3xl text-slate-50;
+        @apply grid grid-cols-1 gap-4 bg-black p-4 text-3xl text-slate-50 md:grid-cols-3;
     }
     .socials-container {
-        @apply flex justify-center gap-4 [&>*]:rounded-full [&>*]:bg-pink-700 [&>*]:p-3 [&>a:hover]:brightness-125;
+        @apply flex justify-center gap-4 md:col-start-2 [&>*]:rounded-full [&>*]:bg-pink-700 [&>*]:p-3 [&>a:hover]:brightness-125;
+    }
+    .commission {
+        @apply my-auto text-center font-mono font-semibold md:text-right;
     }
     .contact-details {
         @apply flex flex-grow flex-col p-4 [&>input]:mb-5 [&>input]:flex-grow  [&>input]:p-2;
