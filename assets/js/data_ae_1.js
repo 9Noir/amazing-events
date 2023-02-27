@@ -184,5 +184,5 @@ data.events.forEach((e) => {
 
 
 data["currentDate"] = new Date().toISOString().slice(0, 10);
-document.querySelector(".flex.p-4.gap-2").insertAdjacentHTML("afterend", `<div class="card event-details mb-4"><p class="bg-pink-700 p-2 text-xl rounded-lg text-slate-50">${new Date().toUTCString().slice(0, 16)}</p></div>`);
+document.querySelector(".flex.p-4.gap-2")?.insertAdjacentHTML("afterend", `<div class="card event-details mb-4"><p class="bg-pink-700 p-2 text-xl rounded-lg text-slate-50">${new Date().toUTCString().slice(0, 16)}</p></div>`);
 // document.querySelector('footer').innerHTML=`<p class="commission text-left">${new Date().toUTCString().slice(5,16)}</p>`+document.querySelector('footer').innerHTML;
