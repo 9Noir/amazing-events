@@ -34,28 +34,25 @@ function firstFilterEvents(p) {
 
 function filterEvents() {
     let filteredEvents = [];
-    let checkedCategories = [];
+    let checkedCategories = [...document.querySelectorAll('input[name="category"]:checked')].map((c) => c.value);
     let searchText = document.querySelector('input[type="search"]').value;
-    //Captura de todos los input checked y agregados al array checkedCategories
-    document.querySelectorAll('input[name="category"]:checked').forEach((c) => checkedCategories.push(c.value));
 
-    //Filtrado de eventos para cada event, si su categoria esta incluida en checkedCategories o si no se capturo ningun checked
     filteredEvents = events.filter((event) => {
-        let categoryMatch = checkedCategories.includes(event.category) || checkedCategories.length === 0;
-        // let searchMatch = e.name.toLowerCase().includes(searchText.toLowerCase());
-        let searchMatch = Object.keys(event).some((key) => event[key].toString().toLowerCase().includes(searchText.toLowerCase())); //Conversion a arrays los atributos del objeto evento. Funcion some() para verificar si cumple al menos una
+        let categoryMatch = checkedCategories.includes(event.category) || checkedCategories.length === 0; //Filtrado de eventos para cada event, si su categoria esta incluida en checkedCategories o si no se capturo ningun checked
+        let searchMatch = JSON.stringify(event).toLowerCase().includes(searchText.toLowerCase());
         return categoryMatch && searchMatch;
     });
 
+    if (filteredEvents.length === 0) filteredEvents = [notMatchEvent];
     renderCards(filteredEvents);
 }
 
 function renderCategories() {
     let categoryContainer = document.querySelector(".category-container");
-    let category = [];
+    let categories = [];
 
-    events.forEach((e) => !category.includes(e.category) && category.push(e.category));
-    category.forEach((c) => (categoryContainer.innerHTML += `<input type="checkbox" id="${c.replace(" ", "_")}" name="category" value="${c}" onChange="filterEvents()"><label for="${c.replace(" ", "_")}">${c}</label>`));
+    events.forEach((e) => !categories.includes(e.category) && categories.push(e.category));
+    categories.forEach((c) => (categoryContainer.innerHTML += `<input type="checkbox" id="${c.replace(" ", "_")}" name="category" value="${c}" onChange="filterEvents()"><label for="${c.replace(" ", "_")}">${c}</label>`));
 }
 
 function renderCards(events) {
@@ -67,9 +64,10 @@ function renderCards(events) {
             card = document.querySelector(".card");
             card.querySelector(".event-capacity").innerHTML += e.capacity;
             card.querySelector(".event-assistance").innerHTML += e.assistance;
+            card.querySelector("a").href += `?id=${e._id}`;
         } else {
             card = document.querySelector(".event-container").cloneNode(true);
-            card.href = "details.html?id=" + e._id;
+            if (e._id !== 0) card.href = "details.html?id=" + e._id;
         }
 
         if (new Date(data.currentDate) > new Date(e.date) && path.includes("index")) card.classList.add("grayscale");
@@ -91,4 +89,27 @@ function renderDate(currentEvent, card) {
     card.querySelector(".event-month").textContent = dateArray[1].toUpperCase();
     card.querySelector(".event-day").textContent = dateArray[2];
     card.querySelector(".event-year").textContent = dateArray[3];
+}
+
+function eventList() {
+    let eventSelector = document.querySelector("#events");
+    events = data.events.sort((a, b) => a.name.localeCompare(b.name));
+    events.forEach((e) => (eventSelector.innerHTML += `<option value="${e.name}" ${e._id == window.location.search.split("=")[1] && "selected"}>${e.name}</option>`));
+}
+
+function handleSubmit(event) {
+    event.preventDefault();
+    const contactContent = document.querySelector("#contactContent");
+    const formData = new FormData(event.target);
+    toggleContactModal();
+
+    for (const [key, value] of formData.entries()) {
+        contactContent.innerHTML += value && `<div class="${key === "message" ? "md:col-span-2" : ""}"><p class="capitalize font-semibold">${key}</p><p class="opacity-70">${value}</p></div>`;
+    }
+    event.target.reset();
+}
+
+function toggleContactModal(clearContactContent) {
+    document.querySelector("#contact-modal").classList.toggle("hidden");
+    if (clearContactContent) contactContent.innerHTML = "";
 }

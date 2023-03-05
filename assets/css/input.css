@@ -73,11 +73,12 @@
         @apply my-auto text-center font-mono font-semibold md:text-right;
     }
     .contact-details {
-        @apply flex flex-grow flex-col p-4 [&>input]:mb-5 [&>input]:flex-grow  [&>input]:p-2;
+        @apply flex flex-grow flex-col p-4 [&>*:not(label)]:mb-3 [&>*:not(label)]:flex-grow  [&>*:not(label)]:p-2;
     }
     input,
-    textarea {
-        @apply rounded-lg bg-blue-100/50 text-slate-800/60 shadow-md dark:bg-slate-400 dark:text-slate-50 placeholder:dark:text-slate-50/80;
+    textarea,
+    select {
+        @apply rounded-lg bg-blue-100/50 text-slate-900/70 shadow-md dark:bg-slate-600 [&>*]:dark:bg-slate-600 dark:text-slate-50/70 placeholder:dark:text-slate-50/80 outline-4 outline-pink-500;
     }
     .table-title {
         @apply bg-black p-3 text-2xl uppercase text-slate-50 [&~*]:bg-pink-700;

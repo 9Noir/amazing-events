@@ -172,17 +172,29 @@ let data = {
     ],
 };
 
-let todayDate = new Date();
-let currentDate = new Date(data.currentDate);
+const todayDate = new Date();
+const currentDate = new Date(data.currentDate);
 
 data.events.forEach((e) => {
     let eventDate = new Date(e.date);
-    let daysDiff = (currentDate-eventDate)/(1000 * 60 * 60 * 24)
-    todayDate.setDate(todayDate.getDate()+daysDiff)
-    e.date = todayDate.toISOString().slice(0, 10)
+    let daysDiff = currentDate.getTime() - eventDate.getTime(); /// (1000 * 60 * 60 * 24);
+    eventDate.setTime(todayDate.getTime() + daysDiff / 5);
+    e.date = eventDate.toISOString().slice(0, 10);
 });
 
+const notMatchEvent = {
+    _id: 0,
+    image: "https://i.ibb.co/HzD6k2W/image.png",
+    name: "No results found",
+    // date: "0001-1-2",
+    date: todayDate,
+    description: "Sorry, we couldn't find any matching events. Please try again with different search criteria.",
+    category: "Event",
+    place: "",
+    capacity: "",
+    assistance: "",
+    price: "",
+};
 
-data["currentDate"] = new Date().toISOString().slice(0, 10);
-document.querySelector(".flex.p-4.gap-2")?.insertAdjacentHTML("afterend", `<div class="card event-details mb-4"><p class="bg-pink-700 p-2 text-xl rounded-lg text-slate-50">${new Date().toUTCString().slice(0, 16)}</p></div>`);
-// document.querySelector('footer').innerHTML=`<p class="commission text-left">${new Date().toUTCString().slice(5,16)}</p>`+document.querySelector('footer').innerHTML;
+data["currentDate"] = todayDate;
+document.querySelector(".flex.p-4.gap-2")?.insertAdjacentHTML("afterend", `<div class="card event-details mb-4"><p class="bg-pink-700 p-2 text-xl rounded-lg text-slate-50">${new Date().toUTCString().slice(0,16)}</p></div>`);
