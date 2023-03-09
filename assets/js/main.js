@@ -17,14 +17,15 @@ let path;
 let events = [];
 let eventsContainer;
 
-function firstFilterEvents(p) {
+async function firstFilterEvents(p) {
+    await fetchData();
     eventsContainer = document.querySelector("#container");
     path = p;
     events = {
         index: data.events,
         upcoming: data.events.filter((e) => new Date(data.currentDate) < new Date(e.date)),
         past: data.events.filter((e) => new Date(data.currentDate) > new Date(e.date)),
-        details: [data.events.find((e) => e._id == window.location.search.split("=")[1])],
+        details: [data.events.find((e) => e.id == window.location.search.split("=")[1])],
     }[p];
 
     if (path !== "details") renderCategories();
@@ -64,10 +65,10 @@ function renderCards(events) {
             card = document.querySelector(".card");
             card.querySelector(".event-capacity").innerHTML += e.capacity;
             card.querySelector(".event-assistance").innerHTML += e.assistance;
-            card.querySelector("a").href += `?id=${e._id}`;
+            card.querySelector("a").href += `?id=${e.id}`;
         } else {
             card = document.querySelector(".event-container").cloneNode(true);
-            if (e._id !== 0) card.href = "details.html?id=" + e._id;
+            if (e.id !== 0) card.href = "details.html?id=" + e.id;
         }
 
         if (new Date(data.currentDate) > new Date(e.date) && path.includes("index")) card.classList.add("grayscale");
@@ -91,10 +92,11 @@ function renderDate(currentEvent, card) {
     card.querySelector(".event-year").textContent = dateArray[3];
 }
 
-function eventList() {
+async function eventList() {
+    await fetchData();
     let eventSelector = document.querySelector("#events");
     events = data.events.sort((a, b) => a.name.localeCompare(b.name));
-    events.forEach((e) => (eventSelector.innerHTML += `<option value="${e.name}" ${e._id == window.location.search.split("=")[1] && "selected"}>${e.name}</option>`));
+    events.forEach((e) => (eventSelector.innerHTML += `<option value="${e.name}" ${e.id == window.location.search.split("=")[1] && "selected"}>${e.name}</option>`));
 }
 
 function handleSubmit(event) {
