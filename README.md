@@ -1,6 +1,9 @@
 # AMAZING EVENTS
 This project is a website for showcasing events. It is built with HTML, CSS (using Tailwind), and JavaScript.
 
+Live website https://9noir.github.io/amazing-events/
+
+
 ## Pages
 The website has several pages:
 
