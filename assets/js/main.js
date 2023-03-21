@@ -143,7 +143,7 @@ function toggleContactModal(clearContactContent) {
 
 async function getEventStats() {
     const upcomingEvents = (await fetchData("?time=upcoming")).events;
-    const pastEvents = (await fetchData("?time=past")).events.sort((a, b) => a.assistance - b.assistance);
+    const pastEvents = (await fetchData("?time=past")).events.sort((a, b) => a.assistance/a.capacity - b.assistance/b.capacity);
     const [maxAssisEvent, minAssisEvent] = [pastEvents[pastEvents.length - 1], pastEvents[0]];
     const maxCapEvent = pastEvents.sort((a, b) => b.capacity - a.capacity)[0];
     let [upcomingCat, pastCat] = [getUniqueCategories(upcomingEvents), getUniqueCategories(pastEvents)];
@@ -174,7 +174,7 @@ function reduceToCategoryData(categories, events) {
 
 function renderStats(maxAssisEvent, minAssisEvent, maxCapEvent, upcomingCat, pastCat) {
     const [statsTable, upcomingStatsTable, pastStatsTable] = document.querySelectorAll("#statsTable, #upcomingStatsTable, #pastStatsTable");
-    statsTable.insertAdjacentHTML("afterend", `<tr class="font-semibold"><td>${maxAssisEvent.name}</td><td>${minAssisEvent.name}</td><td>${maxCapEvent.name}</td></tr><tr><td>${maxAssisEvent.assistance}</td><td>${minAssisEvent.assistance}</td><td>${maxCapEvent.capacity}</td></tr>`);
+    statsTable.insertAdjacentHTML("afterend", `<tr class="font-semibold"><td>${maxAssisEvent.name}</td><td>${minAssisEvent.name}</td><td>${maxCapEvent.name}</td></tr><tr><td>${(maxAssisEvent.assistance/maxAssisEvent.capacity*100).toFixed(2)}%</td><td>${(minAssisEvent.assistance/minAssisEvent.capacity*100).toFixed(2)}%</td><td>${maxCapEvent.capacity}</td></tr>`);
     upcomingCat.forEach((e) => upcomingStatsTable.insertAdjacentHTML("afterend", `<tr><td>${e.category}</td><td>${e.revenues}</td><td>${((e.attendance / e.capacity) * 100).toFixed(2)}%</td></tr>`));
     pastCat.forEach((e) => pastStatsTable.insertAdjacentHTML("afterend", `<tr><td>${e.category}</td><td>${e.revenues}</td><td>${((e.attendance / e.capacity) * 100).toFixed(2)}%</td></tr>`));
 }
