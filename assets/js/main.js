@@ -30,7 +30,7 @@ const eventNotFound = [
 ];
 
 function fetchData(params) {
-    let url = `https://api-amazingevents.onrender.com/api/amazing-events${params || ""}`;
+    let url = `https://5k6e2.wiremockapi.cloud/amazing-events${params || ""}`;
     return fetch(url).then((response) => response.json());
 }
 
@@ -39,7 +39,7 @@ async function firstFilterEvents(p) {
     path = p || "";
 
     if (p === "details") {
-        events = [(await fetchData("/" + window.location.search.split("=")[1])).response];
+        events = [(await fetchData("/" + window.location.search.split("=")[1]))];
     } else {
         data = await fetchData(p && "?time=" + p);
         events = data.events;
@@ -86,7 +86,7 @@ function renderCards(events) {
             card.classList.remove("hidden");
             card.querySelector(".event-capacity").innerHTML += e.capacity;
             card.querySelector(".event-assistance").innerHTML += e.assistance || e.estimate;
-            card.querySelector("a").href += `?id=${e._id}`;
+            card.querySelector("a").href += `?id=${e.id}`;
         } else {
             card = document.querySelector(".event-container").cloneNode(true);
             if (e.id !== 0) card.href = "details.html?id=" + e.id;
